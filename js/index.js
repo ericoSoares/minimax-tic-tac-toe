@@ -11,9 +11,8 @@ var boardMat = [
 
 $(document).ready(function() {
   update();
-  
 });
-
+//Update board after each move
 function update() {
   $('#board').children().each(function() {
     $(this).empty();
@@ -28,7 +27,7 @@ function update() {
     }
   });
 }
-
+//Check for game ending
 function checkWin(grid) {
   //Ugly code ahead
   if(grid[0][0] == grid[0][1] && grid[0][0] == grid[0][2]) {
@@ -60,7 +59,7 @@ function checkWin(grid) {
   }
   return 0;
 }
-
+//Register a move in the board array
 function registerMove(x, y, p) {
   //Register move in the boardMat
   if (boardMat[x][y] == 0) {
@@ -75,7 +74,7 @@ function changePlayer() {
     player = 'X';
   }
 }
-
+//Makes move
 $('.field').click(function() {
   var c1 = $(this).attr('id').charAt(1);
   var c2 = $(this).attr('id').charAt(2);
@@ -92,7 +91,7 @@ $('.field').click(function() {
     }, 100);
   }
 });
-
+//X or O controller
 $('#button1').click(function() {
   if($("#button1").text() == "Play as X") {
     $("#button1").text("Play as O");
@@ -106,7 +105,7 @@ $('#button1').click(function() {
   resetBoard();
   
 });
-
+//Multiplayer button
 $('#button2').click(function() {
   if(multiPlayer) {
     multiPlayer = false;
@@ -129,7 +128,7 @@ function resetBoard() {
   $('.container').fadeIn();
   update();
 }
-
+//Alerts the winner
 function handleGameOver(state) {
   switch(state) {
     case 'X':
@@ -147,7 +146,7 @@ function handleGameOver(state) {
   resetBoard();
   
 }
-
+//Minimax algorithm to calculate computer's moves, ugly code ahead!
 function minimax(newBoard, pl){
   function winning(board, player){
    if (
@@ -217,7 +216,7 @@ function minimax(newBoard, pl){
   }
   return moves[bestMove];
 }
-
+//Register computer move
 function computerMove() {
   var aux = [];
   var c = 0;
